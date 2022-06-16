@@ -1,0 +1,54 @@
+:root {
+    --pulp: #F42069;
+    --rind: #6EC2B1;
+    --seed: #000000;
+}
+
+body {
+    background: var(--bg);
+    color: var(--font_color);
+    font-family: monospace;
+}
+/*
+ul {
+    font-family: helvetica;
+}
+*/
+li {
+    list-style: circle;
+}
+
+.list {
+    list-style: square;
+}
+/*
+#msg {
+    font-family: monospace;
+}
+*/
+
+.btn {
+    position: absolute;
+    top: 20px;
+    left: 525px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: none;
+    color: var(--btn_font_color);
+    background-color: var(--btn_bg);
+}
+
+.light-theme {
+    --bg: var(--rind);
+    --font_color: var(--seed);
+    --btn_font_color: var(--pulp);
+    --btn_bg: var(--seed);
+}
+
+.dark-theme {
+    --bg: var(--seed);
+    --font_color: var(--pulp);
+    --btn_font_color: var(--seed);
+    --btn_bg: var(--rind);
+}
