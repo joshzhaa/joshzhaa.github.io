@@ -2,6 +2,7 @@
     --pulp: #F42069;
     --rind: #6EC2B1;
     --seed: #000000;
+    --cream: #FFFFC2
 }
 
 body {
@@ -9,6 +10,37 @@ body {
     color: var(--font_color);
     font-family: monospace;
 }
+
+#chess-board {
+    text-align: center;
+    border-spacing: 0pt;
+    font-family: Arial Unicode MS;
+    border-collapse: collapse;
+    border-width: 0pt;
+}
+
+.axis-label {
+    width: 24pt;
+    height: 24pt;
+}
+
+.square {
+    width: 24pt;
+    height: 24pt;
+    border-color: #000000;
+    border-style: solid;
+    font-size: 150%;
+    color: var(--seed);
+}
+
+.white {
+    background-color: #FFFFFF;
+}
+
+.black {
+    background-color: #A8A8A8;
+}
+
 /*
 ul {
     font-family: helvetica;
@@ -40,7 +72,7 @@ li {
 }
 
 .light-theme {
-    --bg: var(--rind);
+    --bg: var(--cream);
     --font_color: var(--seed);
     --btn_font_color: var(--pulp);
     --btn_bg: var(--seed);
@@ -50,5 +82,5 @@ li {
     --bg: var(--seed);
     --font_color: var(--pulp);
     --btn_font_color: var(--seed);
-    --btn_bg: var(--rind);
+    --btn_bg: var(--cream);
 }
