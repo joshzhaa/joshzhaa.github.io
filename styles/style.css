@@ -1,0 +1,25 @@
+body {
+    background-color: #0f0f1c;
+}
+
+#chess-board {
+    margin: auto;
+    height: 50%;
+    width: 50%;
+    padding: 10px;
+}
+
+.square {
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+    border: 1px;
+}
+
+.black {
+    background: #383838;
+}
+
+.white {
+    background: #d4d4d4;
+}
