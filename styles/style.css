@@ -1,26 +1,65 @@
-body {
+body, html {
     background-color: #0f0f1c;
+    height: 100%;
+    margin: 0;
 }
-
+#root {
+    background-image: url("/images/Watermelon.svg");
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+#top-bar {
+    height: 15%;
+}
 #chess-board {
     margin: auto;
-    height: 50%;
-    width: 50%;
-    padding: 10px;
     white-space: nowrap;
 }
-
+.board-row {
+    display: flex;
+    justify-content: center;
+}
 .square {
     height: 50px;
     width: 50px;
     cursor: pointer;
-    border: 1px;
+    border: 0px;
 }
-
+.square:hover {
+    filter: brightness(1.2);
+}
 .black {
     background: #383838;
 }
-
 .white {
     background: #d4d4d4;
+}
+.piece-highlight-container {
+    position: relative;
+    display: inline-block;
+}
+.piece {
+    height: 40px;
+    width: 40px;
+}
+.highlight {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 25px;
+    width: 25px;
+    opacity: 0.4;
+}
+.axis-label {
+    position: relative;
+    bottom: 15px;
+    right: 15px;
+    height: 50px;
+    width: 50px;
+    background-color: white;
+    color: #f42069;
+    opacity: 0.4;
 }

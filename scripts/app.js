@@ -3,9 +3,10 @@
 import init, { start, width, height, select, piece_at, player_at, valid_at, rewind } from './chess_rules.js';
 
 class Piece {
-    constructor(pieceID, playerID) {
+    constructor(pieceID, playerID, highlight_state) {
         this.pieceID = pieceID;
         this.playerID = playerID;
+        this.highlight = highlight_state;
     }
 }
 
@@ -44,11 +45,14 @@ function createBoard() {
         let rowElement = document.createElement('div');
         rowElement.className = 'board-row';
         for (let x = 0; x < COLS; x++) {
+            // create square button
             let squareElement = document.createElement('button');
-            squareElement.classList.add((x + y) % 2 == 0 ? 'white': 'black');
-            squareElement.classList.add('square');
-            squareElement.classList.add('x' + x);
-            squareElement.classList.add('y' + y);
+            squareElement.classList.add(
+                (x + y) % 2 == 0 ? 'white': 'black',
+                'square',
+                'x' + x,
+                'y' + y
+            );
             squareElement.addEventListener('click', function() {
                 const xCoord = parseInt(this.classList[2].slice(1));
                 const yCoord = parseInt(this.classList[3].slice(1));
@@ -56,6 +60,21 @@ function createBoard() {
                 select(xCoord, yCoord);
                 drawBoard();
             });
+            // put img in button, to be independently resized
+            // put img inside of container, so they can be overlapped for highlight
+            let container = document.createElement('div');
+            container.classList.add('piece-highlight-container');
+            let sprite = document.createElement('img');
+            sprite.height = '40';
+            sprite.width = '40';
+            sprite.src = 'images/Sq_blank.svg';
+            sprite.classList.add('piece');
+            let highlight = document.createElement('img');
+            highlight.src = 'images/Sq_blank.svg';
+            highlight.classList.add('highlight');
+            container.appendChild(sprite);
+            container.appendChild(highlight);
+            squareElement.appendChild(container);
             rowElement.appendChild(squareElement);
         }
         boardElement.appendChild(rowElement);
@@ -78,14 +97,19 @@ function drawBoard() {
         for (let x = 0; x < rowElement.children.length; x++) {
             updateSquare(x, y);
             let squareElement = rowElement.children[x];
-            squareElement.innerHTML = spriteAt(x, y);
+            squareElement.firstChild.children[0].src = spriteAt(x, y);
+            if (board[vectorToIndex([x, y])].highlight) {
+                squareElement.firstChild.children[1].src = 'images/Location_dot_black.svg';
+            } else {
+                squareElement.firstChild.children[1].src = 'images/Sq_blank.svg';
+            }
         }
     }
 }
 
 function updateSquare(x, y) {
     board[vectorToIndex([x, y])] = new Piece(
-        piece_at(x, y), player_at(x, y)
+        piece_at(x, y), player_at(x, y), valid_at(x, y)
     );
 }
 
@@ -110,7 +134,7 @@ function spriteAt(x, y) {
     const spriteName = piece.playerID == 1 ?
         String.fromCharCode(piece.pieceID):
         String.fromCharCode(piece.pieceID).toLowerCase();
-    return `<img src=images/${spriteTable[spriteName]} height="35" width="35" />`
+    return `images/${spriteTable[spriteName]}`
 }
 
 init().then(() => {
