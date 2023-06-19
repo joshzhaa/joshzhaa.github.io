@@ -33,14 +33,13 @@ function begin() {
     ROWS = height();
     COLS = width();
     board = Array(ROWS * COLS);
-    ROOT.appendChild(createBoard());
-    ROOT.appendChild(createHistory());
+    createBoard();
+    createHistory();
     drawBoard()
 }
 
 function createBoard() {
-    let boardElement = document.createElement('div');
-    boardElement.id = 'chess-board';
+    let boardElement = document.getElementById('chess-board');
     for (let y = ROWS - 1; y >= 0; y--) {
         let rowElement = document.createElement('div');
         rowElement.className = 'board-row';
@@ -79,13 +78,10 @@ function createBoard() {
         }
         boardElement.appendChild(rowElement);
     }
-    return boardElement;
 }
 
 function createHistory() {
-    let historyElement = document.createElement('div');
-    historyElement.id = 'chess-history';
-    return historyElement;
+    let historyElement = document.getElementById('chess-history');
 }
 
 // @@@ rendering
