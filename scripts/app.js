@@ -64,8 +64,6 @@ function createBoard() {
             let container = document.createElement('div');
             container.classList.add('piece-highlight-container');
             let sprite = document.createElement('img');
-            sprite.height = '40';
-            sprite.width = '40';
             sprite.src = 'images/Sq_blank.svg';
             sprite.classList.add('piece');
             let highlight = document.createElement('img');

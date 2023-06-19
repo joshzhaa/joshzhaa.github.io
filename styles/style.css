@@ -2,42 +2,45 @@ body, html {
     background-color: #0f0f1c;
     height: 100%;
     margin: 0;
-    font: small-caps bold 24px/1 sans-serif;
+    font: small-caps bold 40px/1 sans-serif;
     color: #fafafa;
 }
 #root {
-    background-image: url("/images/Watermelon.svg");
     height: 100%; 
+}
+#side-bar {
+    background-image: url("/images/Watermelon.svg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
-}
-#side-bar {
     position: fixed;
     height: 100%;
+    width: 25%;
     top: 0;
     left: 0;
     overflow-x: hidden;
     padding-top: 30px;
     padding-left: 20px;
+    z-index: 1;
 }
 #side-title {
     padding: 6px 6px 6px 6px;
     display: block;
 }
 #chess-board {
-    padding-top: 30px;
-    position: static;
+    padding-top: 120px;
+    position: relative;
     margin: auto;
     white-space: nowrap;
+    z-index: 5;
 }
 .board-row {
     display: flex;
     justify-content: center;
 }
 .square {
-    height: 50px;
-    width: 50px;
+    height: 80px;
+    width: 80px;
     cursor: pointer;
     border: 0px;
 }
@@ -55,17 +58,15 @@ body, html {
     display: inline-block;
 }
 .piece {
-    height: 40px;
-    width: 40px;
+    height: 70px;
+    width: 70px;
 }
 .highlight {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    height: 25px;
-    width: 25px;
-    opacity: 0.4;
+    position: relative;
+    transform: translate(-130%, -30%);
+    height: 40px;
+    width: 40px;
+    opacity: 0.6;
 }
 .axis-label {
     position: relative;
