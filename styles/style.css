@@ -56,6 +56,9 @@ body, html {
 .piece-highlight-container {
     position: relative;
     display: inline-block;
+    height: 70px;
+    width: 70px;
+    z-index: 10;
 }
 .piece {
     height: 70px;
@@ -70,11 +73,39 @@ body, html {
 }
 .axis-label {
     position: relative;
-    bottom: 15px;
-    right: 15px;
-    height: 50px;
-    width: 50px;
-    background-color: white;
-    color: #f42069;
-    opacity: 0.4;
+    z-index: 8;
+    color: #F44D61;
+    opacity: 0.7;
+    font: small-caps bold sans-serif;
+}
+.row-label {
+    right: 68px;
+    bottom: 56px;
+}
+.col-label {
+    right: 10px;
+}
+
+#chess-history {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 25%;
+    height: 100%;
+    overflow-x: hidden;
+    padding-top: 30px;
+    padding-right: 20px;
+}
+.history-entry {
+    display: grid;
+}
+.history-icon {
+    left: 0;
+}
+.history-text {
+    font: "Verdana";
+    font-variant: normal;
+    font-weight: normal;
+    font-size: 20px;
+    left: 60px;
 }

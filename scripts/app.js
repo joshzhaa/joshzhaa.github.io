@@ -35,7 +35,23 @@ function begin() {
     board = Array(ROWS * COLS);
     createBoard();
     createHistory();
-    drawBoard()
+    drawBoard();
+}
+
+function createHistory() {
+    let historyElement = document.getElementById('chess-history');
+    let entryElement = document.createElement('div');
+    entryElement.classList.add('history-entry');
+    let iconElement = document.createElement('img');
+    iconElement.src = 'images/Chess_kdt45.svg';
+    iconElement.classList.add('history-icon');
+    entryElement.appendChild(iconElement);
+    let textElement = document.createElement('span');
+    textElement.classList.add('history-text');
+    textElement.innerHTML = 'd4';
+    entryElement.appendChild(textElement);
+    historyElement.appendChild(entryElement);
+    historyElement.appendChild(entryElement);
 }
 
 function createBoard() {
@@ -43,6 +59,7 @@ function createBoard() {
     for (let y = ROWS - 1; y >= 0; y--) {
         let rowElement = document.createElement('div');
         rowElement.className = 'board-row';
+        // axis label
         for (let x = 0; x < COLS; x++) {
             // create square button
             let squareElement = document.createElement('button');
@@ -59,27 +76,41 @@ function createBoard() {
                 select(xCoord, yCoord);
                 drawBoard();
             });
-            // put img in button, to be independently resized
-            // put img inside of container, so they can be overlapped for highlight
-            let container = document.createElement('div');
-            container.classList.add('piece-highlight-container');
-            let sprite = document.createElement('img');
-            sprite.src = 'images/Sq_blank.svg';
-            sprite.classList.add('piece');
-            let highlight = document.createElement('img');
-            highlight.src = 'images/Sq_blank.svg';
-            highlight.classList.add('highlight');
-            container.appendChild(sprite);
-            container.appendChild(highlight);
-            squareElement.appendChild(container);
+            squareElement.appendChild(createSprite());
+            if (x == 0) {
+                let rowLabel = document.createElement('span');
+                rowLabel.innerHTML = y + 1;
+                rowLabel.classList.add('axis-label');
+                rowLabel.classList.add('row-label');
+                squareElement.appendChild(rowLabel);
+            }
+            if (y == 0) {
+                let rowLabel = document.createElement('span');
+                rowLabel.innerHTML = String.fromCharCode(x + 'a'.charCodeAt(0));
+                rowLabel.classList.add('axis-label');
+                rowLabel.classList.add('col-label');
+                squareElement.appendChild(rowLabel);
+            }
             rowElement.appendChild(squareElement);
         }
         boardElement.appendChild(rowElement);
     }
 }
 
-function createHistory() {
-    let historyElement = document.getElementById('chess-history');
+function createSprite() {
+    // put img in button, to be independently resized
+    // put img inside of container, so they can be overlapped for highlight
+    let container = document.createElement('div');
+    container.classList.add('piece-highlight-container');
+    let sprite = document.createElement('img');
+    sprite.src = 'images/Sq_blank.svg';
+    sprite.classList.add('piece');
+    let highlight = document.createElement('img');
+    highlight.src = 'images/Sq_blank.svg';
+    highlight.classList.add('highlight');
+    container.appendChild(sprite);
+    container.appendChild(highlight);
+    return container;
 }
 
 // @@@ rendering
