@@ -35,6 +35,7 @@ function begin() {
     board = Array(ROWS * COLS);
     createBoard();
     createHistory();
+    createHistory();
     drawBoard();
 }
 
@@ -50,7 +51,6 @@ function createHistory() {
     textElement.classList.add('history-text');
     textElement.innerHTML = 'd4';
     entryElement.appendChild(textElement);
-    historyElement.appendChild(entryElement);
     historyElement.appendChild(entryElement);
 }
 
