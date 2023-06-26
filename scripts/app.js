@@ -139,7 +139,7 @@ function updateSquare(x, y) {
     );
     const next = board[index];
     if (!pieceEquals(prev, next) && next.pieceID != 32) {
-        recordHistory(next.pieceID, next.playerID, String.fromCharCode(x + 'a'.charCodeAt(0)) + y.toString());
+        recordHistory(next.pieceID, next.playerID, String.fromCharCode(x + 'a'.charCodeAt(0)) + (y + 1).toString());
     }
 }
 
