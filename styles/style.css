@@ -44,7 +44,7 @@ body, html {
     cursor: pointer;
     border: 0px;
 }
-.square:hover {
+.square:active {
     filter: brightness(1.2);
 }
 .black {

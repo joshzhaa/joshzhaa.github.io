@@ -10,14 +10,23 @@ class Piece {
     }
 }
 
+class Move {
+    constructor(pieceID, playerID, target) {
+        this.pieceID = pieceID;
+        this.playerID = playerID;
+        this.target = target;
+    }
+}
+
 let ROOT = document.getElementById('root');
 
 // represents m x n board as m * n array
 let board = [];
-// represents history as an array of previous board arrays
+// represents history as 
 let history = [];
 let ROWS;
 let COLS;
+let started = false;
 
 // @@@ convert betweeen (x, y) and 1D index in board
 function vectorToIndex(vector) {
@@ -27,6 +36,11 @@ function indexToVector(index) {
     return [Math.floor(index / COLS), index % COLS]
 }
 
+// @@@ for detecting whether board state has changed
+function pieceEquals(left, right) {
+    return left.pieceID == right.pieceID && left.playerID == right.playerID;
+}
+
 // @@@ init state
 function begin() {
     start();
@@ -34,24 +48,8 @@ function begin() {
     COLS = width();
     board = Array(ROWS * COLS);
     createBoard();
-    createHistory();
-    createHistory();
     drawBoard();
-}
-
-function createHistory() {
-    let historyElement = document.getElementById('chess-history');
-    let entryElement = document.createElement('div');
-    entryElement.classList.add('history-entry');
-    let iconElement = document.createElement('img');
-    iconElement.src = 'images/Chess_kdt45.svg';
-    iconElement.classList.add('history-icon');
-    entryElement.appendChild(iconElement);
-    let textElement = document.createElement('span');
-    textElement.classList.add('history-text');
-    textElement.innerHTML = 'd4';
-    entryElement.appendChild(textElement);
-    historyElement.appendChild(entryElement);
+    started = true;
 }
 
 function createBoard() {
@@ -61,6 +59,7 @@ function createBoard() {
         rowElement.className = 'board-row';
         // axis label
         for (let x = 0; x < COLS; x++) {
+            board[vectorToIndex([x, y])] = new Piece(' ', 0, false);
             // create square button
             let squareElement = document.createElement('button');
             squareElement.classList.add(
@@ -133,9 +132,15 @@ function drawBoard() {
 }
 
 function updateSquare(x, y) {
-    board[vectorToIndex([x, y])] = new Piece(
+    const index = vectorToIndex([x, y])
+    const prev = board[index];
+    board[index] = new Piece(
         piece_at(x, y), player_at(x, y), valid_at(x, y)
     );
+    const next = board[index];
+    if (!pieceEquals(prev, next) && next.pieceID != 32) {
+        recordHistory(next.pieceID, next.playerID, String.fromCharCode(x + 'a'.charCodeAt(0)) + y.toString());
+    }
 }
 
 const spriteTable = {
@@ -160,6 +165,27 @@ function spriteAt(x, y) {
         String.fromCharCode(piece.pieceID):
         String.fromCharCode(piece.pieceID).toLowerCase();
     return `images/${spriteTable[spriteName]}`
+}
+
+function recordHistory(pieceID, playerID, target) {
+    if (!started) return;
+    history.push(new Move(pieceID, target));
+    // add element to history
+    let historyElement = document.getElementById('chess-history');
+    let entryElement = document.createElement('div');
+    entryElement.classList.add('history-entry');
+    let iconElement = document.createElement('img');
+    const spriteName = playerID == 1 ?
+        String.fromCharCode(pieceID):
+        String.fromCharCode(pieceID).toLowerCase();
+    iconElement.src = `images/${spriteTable[spriteName]}`;
+    iconElement.classList.add('history-icon');
+    entryElement.appendChild(iconElement);
+    let textElement = document.createElement('span');
+    textElement.classList.add('history-text');
+    textElement.innerHTML = target;
+    entryElement.appendChild(textElement);
+    historyElement.appendChild(entryElement);
 }
 
 init().then(() => {
