@@ -174,6 +174,19 @@ function recordHistory(pieceID, playerID, target) {
     let historyElement = document.getElementById('chess-history');
     let entryElement = document.createElement('div');
     entryElement.classList.add('history-entry');
+    const halfmoveIndex = history.length;
+    entryElement.classList.add(
+        'h' + halfmoveIndex, 
+        halfmoveIndex % 2 == 0 ?
+            'light-green':
+            'dark-green',
+    );
+    // halfmove index
+    const indexElement = document.createElement('span');
+    indexElement.classList.add('history-index');
+    indexElement.innerHTML = halfmoveIndex + '.';
+    entryElement.appendChild(indexElement);
+    // sprite icon
     let iconElement = document.createElement('img');
     const spriteName = playerID == 1 ?
         String.fromCharCode(pieceID):
@@ -181,11 +194,13 @@ function recordHistory(pieceID, playerID, target) {
     iconElement.src = `images/${spriteTable[spriteName]}`;
     iconElement.classList.add('history-icon');
     entryElement.appendChild(iconElement);
+    // text
     let textElement = document.createElement('span');
     textElement.classList.add('history-text');
     textElement.innerHTML = target;
     entryElement.appendChild(textElement);
-    historyElement.appendChild(entryElement);
+
+    historyElement.insertBefore(entryElement, historyElement.children[1]);
 }
 
 init().then(() => {

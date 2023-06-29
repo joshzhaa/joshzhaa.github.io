@@ -87,35 +87,55 @@ body, html {
 }
 
 #chess-history {
-    --history-rows: 3;
+    --history-rows: 10;
     display: grid;
     grid-gap: 0;
-    grid-template-rows: repeat(var(--history-rows), 50px);
+    grid-template-rows: repeat(var(--history-rows), 80px);
     grid-template-columns: 1fr;
-    grid-auto-rows: 50px;
+    grid-auto-rows: 80px;
     align-content: flex-start;
     position: fixed;
     top: 0;
     right: 0;
     width: 25%;
-    height: 100%;
+    height: 800px;
     overflow-x: hidden;
+    overflow-y: scroll;
     padding-top: 30px;
     padding-right: 20px;
 }
 .history-title {
     height: 50px;
+    text-align: center;
 }
 .history-entry {
-    height: 50px;
+    position: relative;
+    left: 25%;
+    text-align: center;
+    height: 80px;
+    width: 50%;
+}
+.history-index {
+    position: relative;
+    top: 7%;
+    right: 10px;
+    font-size: 30px;
 }
 .history-icon {
-    left: 0;
+    position: relative;
+    top: 20%;
 }
 .history-text {
     font: "Verdana";
     font-variant: normal;
     font-weight: normal;
     font-size: 20px;
-    left: 60px;
+    position: relative;
+    top: 5%;
+}
+.light-green {
+    background-color: #0f664d;
+}
+.dark-green {
+    background-color: #102b1c;
 }
