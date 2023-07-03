@@ -50,6 +50,7 @@ function begin() {
     createBoard();
     drawBoard();
     started = true;
+    initUndoButton();
 }
 
 function createBoard() {
@@ -199,9 +200,24 @@ function recordHistory(pieceID, playerID, target) {
     textElement.classList.add('history-text');
     textElement.innerHTML = target;
     entryElement.appendChild(textElement);
-
     historyElement.insertBefore(entryElement, historyElement.children[1]);
 }
+
+// other controls
+function undo() {
+    console.log('rewinding');
+    rewind(1);
+    drawBoard();
+}
+function initUndoButton() {
+    const undoButton = document.getElementById('rewind-button');
+    console.log(undoButton);
+    undoButton.addEventListener('click', function() {
+        console.log('here');
+    });
+    console.log(undoButton);
+}
+
 
 init().then(() => {
     begin()

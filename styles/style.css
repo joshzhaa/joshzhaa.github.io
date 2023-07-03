@@ -27,6 +27,19 @@ body, html {
     padding: 6px 6px 6px 6px;
     display: block;
 }
+#controls {
+    margin-top: 20px;
+}
+#rewind-button {
+/*    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;*/
+    height: 50px;
+    width: 50px;
+}
 #chess-board {
     padding-top: 120px;
     position: relative;
@@ -105,7 +118,8 @@ body, html {
     padding-right: 20px;
 }
 .history-title {
-    height: 50px;
+    padding: 6px 6px 6px 6px;
+    display: block;
     text-align: center;
 }
 .history-entry {
